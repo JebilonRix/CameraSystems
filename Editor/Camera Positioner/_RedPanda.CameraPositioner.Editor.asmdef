@@ -1,0 +1,18 @@
+{
+    "name": "_RedPanda.CameraPositioner.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f54e83877b10e5544ad529fbe263505a"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
