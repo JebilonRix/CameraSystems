@@ -19,6 +19,7 @@ namespace RedPanda.CameraSystem
         #endregion Unity Methods
 
         #region Public Methods
+        //This method is for editor
         public void FindTarget()
         {
             MonoBehaviour[] monoBehaviours = FindObjectsOfType<MonoBehaviour>();
@@ -32,12 +33,18 @@ namespace RedPanda.CameraSystem
                 }
             }
         }
+        /// <summary>
+        /// Sets position with offset which is applied.
+        /// </summary>
         public void SetPosition()
         {
-            if (_target != null)
+            if (_target == null)
             {
-                transform.SetPositionAndRotation(_target.transform.position + _followDistance, Quaternion.Euler(_followRotation));
+                enabled = false;
+                return;
             }
+
+            transform.SetPositionAndRotation(_target.transform.position + _followDistance, Quaternion.Euler(_followRotation));
         }
         #endregion Public Methods
     }

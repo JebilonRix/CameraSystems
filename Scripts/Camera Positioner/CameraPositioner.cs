@@ -15,6 +15,9 @@ namespace RedPanda.CameraSystem
             }
         }
 
+        /// <summary>
+        /// Sets position and rotation.
+        /// </summary>
         public void MoveCamera(int id)
         {
             if (transform.position != cameraPositions[id].CameraPosition)
