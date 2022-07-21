@@ -6,6 +6,7 @@ namespace RedPanda.CameraSystem
     [CustomEditor(typeof(CameraPositioner))]
     public class CameraPositionerEditor : Editor
     {
+        #region Fields And Properties
         private CameraPositioner positioner;
         private int _index = 0;
 
@@ -13,13 +14,13 @@ namespace RedPanda.CameraSystem
         {
             get
             {
-                if (_index >= positioner.cameraPositions.Count)
+                if (_index >= positioner.CameraPositions.Count)
                 {
                     _index = 0;
                 }
                 else if (_index < 0)
                 {
-                    _index = positioner.cameraPositions.Count - 1;
+                    _index = positioner.CameraPositions.Count - 1;
                 }
 
                 return _index;
@@ -28,15 +29,15 @@ namespace RedPanda.CameraSystem
             set => _index = value;
         }
 
+        #endregion Fields And Properties
+
+        #region Unity Methods
         private void OnEnable()
         {
             Index = 0;
             positioner = (CameraPositioner)target;
         }
-        private void OnDisable()
-        {
-            Index = 0;
-        }
+        private void OnDisable() => Index = 0;
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -46,15 +47,27 @@ namespace RedPanda.CameraSystem
                 ToPosition(1);
             }
 
-            if (GUILayout.Button("Before Position"))
+            if (GUILayout.Button("Previous Position"))
             {
                 ToPosition(-1);
             }
         }
+        #endregion Unity Methods
+
+        #region Private Methods
         private void ToPosition(int index)
         {
             Index += index;
-            positioner.transform.SetPositionAndRotation(positioner.cameraPositions[Index].CameraPosition, Quaternion.Euler(positioner.cameraPositions[Index].CameraRotation));
+
+            if (positioner.SetPosition)
+            {
+                positioner.transform.position = positioner.CameraPositions[Index].CameraPosition;
+            }
+            if (positioner.SetRotation)
+            {
+                positioner.transform.rotation = Quaternion.Euler(positioner.CameraPositions[Index].CameraRotation);
+            }
         }
+        #endregion Private Methods
     }
 }
